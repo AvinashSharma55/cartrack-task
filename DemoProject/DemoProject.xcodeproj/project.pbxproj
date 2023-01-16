@@ -28,6 +28,7 @@
 		E13483F1297530DC005D0019 /* MKMapView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483F0297530DC005D0019 /* MKMapView+Ext.swift */; };
 		E13483F32975349B005D0019 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483F22975349B005D0019 /* UserAnnotation.swift */; };
 		E13483F529755489005D0019 /* UserMarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483F429755489005D0019 /* UserMarkerAnnotationView.swift */; };
+		E13483F729757F59005D0019 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E13483F629757F59005D0019 /* Info.plist */; };
 		E1CFCE1E2971B9C5003A9095 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CFCE1D2971B9C5003A9095 /* AppDelegate.swift */; };
 		E1CFCE202971B9C5003A9095 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CFCE1F2971B9C5003A9095 /* SceneDelegate.swift */; };
 		E1CFCE222971B9C5003A9095 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CFCE212971B9C5003A9095 /* LoginViewController.swift */; };
@@ -96,13 +97,13 @@
 		E13483F0297530DC005D0019 /* MKMapView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Ext.swift"; sourceTree = "<group>"; };
 		E13483F22975349B005D0019 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 		E13483F429755489005D0019 /* UserMarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMarkerAnnotationView.swift; sourceTree = "<group>"; };
+		E13483F629757F59005D0019 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1CFCE1A2971B9C5003A9095 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFCE1D2971B9C5003A9095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1CFCE1F2971B9C5003A9095 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E1CFCE212971B9C5003A9095 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		E1CFCE262971B9C6003A9095 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E1CFCE292971B9C6003A9095 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		E1CFCE2B2971B9C6003A9095 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1CFCE302971B9C6003A9095 /* DemoProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoProjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFCE342971B9C6003A9095 /* DemoProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoProjectTests.swift; sourceTree = "<group>"; };
 		E1CFCE3A2971B9C6003A9095 /* DemoProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,8 +205,8 @@
 				E1CFCE1F2971B9C5003A9095 /* SceneDelegate.swift */,
 				E1CFCE262971B9C6003A9095 /* Assets.xcassets */,
 				E1CFCE282971B9C6003A9095 /* LaunchScreen.storyboard */,
-				E1CFCE2B2971B9C6003A9095 /* Info.plist */,
 				E1CFCE84297308AF003A9095 /* users.db */,
+				E13483F629757F59005D0019 /* Info.plist */,
 			);
 			path = DemoProject;
 			sourceTree = "<group>";
@@ -420,6 +421,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E13483F729757F59005D0019 /* Info.plist in Resources */,
 				E1CFCE85297308AF003A9095 /* users.db in Resources */,
 				E1CFCE2A2971B9C6003A9095 /* LaunchScreen.storyboard in Resources */,
 				E1CFCE272971B9C6003A9095 /* Assets.xcassets in Resources */,
