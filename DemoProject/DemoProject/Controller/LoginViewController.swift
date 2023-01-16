@@ -7,24 +7,26 @@
 
 import UIKit
 
-class LoginViewController : UIViewController {
+final class LoginViewController : BaseViewController {
 	
-	var signInLabel : UILabel!
-	var loginButton : UIButton!
-	var userNameContainerView : UIView!
-	var userNameTextField : UITextField!
-	var countryflagLabel : UILabel!
-	var countrySelectionButton : UIButton!
-	var passwordContainerView : UIView!
-	var passwordTextField : UITextField!
-	var passwordRevealButton : UIButton!
-	var userNameErrorLabel : UILabel!
-	var passwordErrorLabel : UILabel!
+	private var signInLabel : UILabel!
+	private var loginButton : UIButton!
+	private var userNameContainerView : UIView!
+	private var userNameTextField : UITextField!
+	private var countryflagLabel : UILabel!
+	private var countrySelectionButton : UIButton!
+	private var passwordContainerView : UIView!
+	private var passwordTextField : UITextField!
+	private var passwordRevealButton : UIButton!
+	private var userNameErrorLabel : UILabel!
+	private var passwordErrorLabel : UILabel!
+	private var loginViewModel : LoginViewModel!
+	private var countryViewModel : CountryViewModel!
+	
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		setUpView()
-		
 	}
 	
 	func setUpView() {
@@ -85,7 +87,7 @@ class LoginViewController : UIViewController {
 		passwordErrorLabel.textAlignment = .left
 		passwordErrorLabel.text = StringConstants.passwordErrorMessage
 		passwordErrorLabel.font = UIFont.boldSystemFont(ofSize: 12.0)
-		passwordErrorLabel.isHidden = false
+		passwordErrorLabel.isHidden = true
 		passwordErrorLabel.numberOfLines = 1
 		passwordErrorLabel.lineBreakMode = .byTruncatingTail
 		
@@ -146,7 +148,6 @@ class LoginViewController : UIViewController {
 		countryflagLabel.textAlignment = .center
 		countryflagLabel.font = UIFont.systemFont(ofSize: 19.0, weight: .regular)
 		countryflagLabel.textColor = .white
-		countryflagLabel.text = "🇧🇪"
 		
 		userNameContainerView.addSubview(countryflagLabel)
 		
@@ -167,10 +168,12 @@ class LoginViewController : UIViewController {
 		userNameTextField.keyboardType = .default
 		userNameTextField.attributedPlaceholder = NSAttributedString.init(string: StringConstants.userNamePlaceholderTitle, attributes: [NSAttributedString.Key.foregroundColor : HelperFunctions.getLoginContainerViewsBorderColor() , NSMutableAttributedString.Key.font : UIFont.systemFont(ofSize: 19.0, weight: .regular)])
 		userNameTextField.tag = 1
+		userNameTextField.autocapitalizationType = .none
+		userNameTextField.autocorrectionType = .no
 		userNameTextField.textColor  = .white
 		userNameTextField.tintColor = .white
 		userNameTextField.contentVerticalAlignment = .center
-		
+		userNameTextField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .allEditingEvents)
 		
 		userNameContainerView.addSubview(userNameTextField)
 		
@@ -207,8 +210,10 @@ class LoginViewController : UIViewController {
 		passwordTextField.contentVerticalAlignment = .center
 		passwordTextField.textColor = .white
 		passwordTextField.tag = 2
+		passwordTextField.autocapitalizationType = .none
+		passwordTextField.autocorrectionType = .no
 		passwordTextField.tintColor = .white
-		
+		passwordTextField.addTarget(self, action: #selector(textFieldValueChanged(_:)), for: .allEditingEvents)
 		passwordContainerView.addSubview(passwordTextField)
 		
 		passwordRevealButton = UIButton()
@@ -233,21 +238,75 @@ class LoginViewController : UIViewController {
 		passwordRevealButton.widthAnchor.constraint(equalToConstant: 30.0).isActive = true
 		
 		
+		bindViewToViewModel()
+	}
+	
+	func bindViewToViewModel() {
+		self.loginViewModel = LoginViewModel()
+		self.loginViewModel.onValidationOfLoginValues  = {
+			[weak self] result in
+			if result == .validationSuccess {
+				print("Success")
+			}
+			else {
+				let userNameErrorText = self?.loginViewModel.getTextBasedOnValidationResult(loginValidationResult: result, field: .username)
+				let passwordErrorText = self?.loginViewModel.getTextBasedOnValidationResult(loginValidationResult: result, field: .password)
+				if (userNameErrorText ?? "").count > 0 {
+					self?.userNameContainerView.layer.borderColor = HelperFunctions.getErrorColor().cgColor
+					self?.userNameErrorLabel.isHidden = false
+				}
+				if (passwordErrorText ?? "").count > 0 {
+					self?.passwordContainerView.layer.borderColor = HelperFunctions.getErrorColor().cgColor
+					self?.passwordErrorLabel.isHidden = false
+				}
+				
+				
+			}
+		}
+		
+		self.countryViewModel = CountryViewModel()
+		self.countryViewModel.onCountrySelection = {
+			[weak self] flagName in
+			self?.countryflagLabel.text = flagName
+		}
+		self.countryViewModel.selectDefaultCountry()
+		
 	}
 	
 	@objc func loginButtonTapped(_ sender : Any?) {
 		guard let _ = sender else { return }
-		
+		self.loginViewModel.validateUserNameAndPassword(userName: userNameTextField.text, password: passwordTextField.text)
 	}
 	
 	@objc func countryButtonTapped(_ sender : Any?) {
-		
+		guard let _ = sender else {return }
+		let pickerViewController = PickerViewController(viewModel: self.countryViewModel.getPickerViewModel())
+		pickerViewController.modalPresentationStyle = .overCurrentContext
+		pickerViewController.onSelectingCountry = {
+			[weak self] country in
+			self?.dismiss(animated: true, completion: {
+				self?.countryViewModel.didSelectCountry(country: country)
+			})
+		}
+		self.present(pickerViewController, animated: true)
 	}
 	
 	@objc func passwordRevealButtonTapped(_ sender : Any?) {
 		guard let _ = sender else { return }
 		passwordTextField.isSecureTextEntry.toggle()
 		passwordRevealButton.isSelected = !passwordRevealButton.isSelected
+	}
+	
+	@objc private func textFieldValueChanged(_ sender : UITextField?) {
+		guard let textfield = sender else { return }
+		if textfield.tag == 1 {
+			self.userNameContainerView.layer.borderColor = HelperFunctions.getLoginContainerViewsBorderColor().cgColor
+			userNameErrorLabel.isHidden = true
+		}
+		else {
+			self.passwordContainerView.layer.borderColor = HelperFunctions.getLoginContainerViewsBorderColor().cgColor
+			passwordErrorLabel.isHidden = true
+		}
 	}
 
 
@@ -260,6 +319,7 @@ extension LoginViewController : UITextFieldDelegate {
 		}
 		else {
 			passwordTextField.resignFirstResponder()
+			self.loginButtonTapped(passwordTextField)
 		}
 		return true
 	}

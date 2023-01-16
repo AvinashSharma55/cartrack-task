@@ -7,9 +7,10 @@
 
 import UIKit
 
-class SplashViewController: UIViewController {
+final class SplashViewController: UIViewController {
 	
-	var imageView : UIImageView!
+	private var imageView : UIImageView!
+	private var viewModel : SplashViewModel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,15 +34,40 @@ class SplashViewController: UIViewController {
 		imageView.heightAnchor.constraint(equalToConstant: 200.0).isActive = true
 		imageView.widthAnchor.constraint(equalToConstant: 200.0).isActive = true
 		
-		launchLoginViewController()
+		createViewModel()
 	}
+	
+	func createViewModel() {
+		
+		viewModel = SplashViewModel.init(onCheckCompletion: {
+			[weak self] status in
+			if status {
+				self?.launchHomeViewController()
+			}
+			else {
+				self?.launchLoginViewController()
+			}
+		})
+	}
+	
+
 	
 	func launchLoginViewController() {
 		DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
 			if #available(iOS 13.0, *) {
 				HelperFunctions.getFirstSceneDelegate()?.loginUser()
 			} else {
-				
+				HelperFunctions.getAppDelegate()?.loginUser()
+			}
+		})
+	}
+	
+	func launchHomeViewController() {
+		DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+			if #available(iOS 13.0, *) {
+				HelperFunctions.getFirstSceneDelegate()?.takeUserToHome()
+			} else {
+				HelperFunctions.getAppDelegate()?.takeUserToHome()
 			}
 		})
 	}

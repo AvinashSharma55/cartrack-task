@@ -52,6 +52,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		window?.makeKeyAndVisible()
 		
 	}
+	
+	func takeUserToHome() {
+		let homeViewController = HomeViewController()
+		window?.rootViewController = homeViewController
+		window?.makeKeyAndVisible()
+	}
 
 
 }
