@@ -27,7 +27,11 @@ class DemoProjectTests: XCTestCase {
     }
 
     func testPerformanceExample() throws {
-        // This is an example of a performance test case.
+		//test case to validate username & password
+        let loginViewModel = LoginViewModel()
+		loginViewModel.validateUserNameAndPassword(userName: "avinash", password: "avin@sh0110")
+		XCTAssertEqual(LoginValidationResults.validationSuccess, loginViewModel.validationState)
+		
         self.measure {
             // Put the code you want to measure the time of here.
         }

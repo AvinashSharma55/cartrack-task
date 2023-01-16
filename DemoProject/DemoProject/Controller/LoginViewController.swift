@@ -253,7 +253,6 @@ final class LoginViewController : BaseViewController {
 						HelperFunctions.getAppDelegate()?.takeUserToHome()
 					}
 				})
-				return true
 			}
 			else if result == .databaseError {
 				self?.loaderView.showErrorLabel(errorType: .server, uiView: self?.view ?? UIView())
@@ -272,7 +271,6 @@ final class LoginViewController : BaseViewController {
 				
 				
 			}
-			return false
 		}
 		
 		self.countryViewModel = CountryViewModel()

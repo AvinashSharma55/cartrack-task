@@ -10,8 +10,9 @@ import Foundation
 class LoginViewModel  {
 	
 	private var databaseProvider : DatabaseProvider!
+	private (set) var validationState : LoginValidationResults!
 	
-	var onValidationOfLoginValues : ((LoginValidationResults)->(Bool))?
+	var onValidationOfLoginValues : ((LoginValidationResults)->())?
 
 	
 	init() {
@@ -20,36 +21,44 @@ class LoginViewModel  {
 	
 	func validateUserNameAndPassword(userName : String? , password : String?) {
 		if (((userName ?? "").count == 0) && ((password ?? "").count == 0)){
-			let _ = self.onValidationOfLoginValues?(.emptyUserNameAndPassword)
+			validationState = .emptyUserNameAndPassword
+			self.onValidationOfLoginValues?(.emptyUserNameAndPassword)
 		}
 		else if (userName ?? "").count == 0 {
-			_ =  self.onValidationOfLoginValues?(.emptyUserName)
+			validationState = .emptyUserName
+			self.onValidationOfLoginValues?(.emptyUserName)
 		}
 		else if (password ?? "").count == 0 {
-			 _  = self.onValidationOfLoginValues?(.emptyPassword)
+			validationState = .emptyPassword
+			self.onValidationOfLoginValues?(.emptyPassword)
 		}
 		else {
 			if databaseProvider.database == nil {
-				_  = self.onValidationOfLoginValues?(.databaseError)
+				validationState = .databaseError
+				self.onValidationOfLoginValues?(.databaseError)
 			}
 			else {
 				let databaseResults =  databaseProvider.checkIfUserExists(userName: userName ?? "")
 				switch databaseResults.1 {
 					case .error :
-						_ = self.onValidationOfLoginValues?(.databaseError)
+						validationState = .databaseError
+						self.onValidationOfLoginValues?(.databaseError)
 						break
 					case .success :
 						let loginUser = databaseResults.0
 						if ((loginUser?.password ?? "") == (password ?? "")) {
-							let val = self.onValidationOfLoginValues?(.validationSuccess)
-							UserDefaultsHelper.setObject(value: val, key: .isUserLoggedIn)
+							validationState = .validationSuccess
+							self.onValidationOfLoginValues?(.validationSuccess)
+							UserDefaultsHelper.setObject(value: true, key: .isUserLoggedIn)
 						}
 						else {
-							_  = self.onValidationOfLoginValues?(.invalidPassword)
+							validationState = .invalidPassword
+							self.onValidationOfLoginValues?(.invalidPassword)
 						}
 						break
 					case .noResults :
-						_ = self.onValidationOfLoginValues?(.invalidUsername)
+						validationState = .invalidUsername
+						self.onValidationOfLoginValues?(.invalidUsername)
 						break
 				}
 			}
