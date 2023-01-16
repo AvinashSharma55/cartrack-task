@@ -16,3 +16,6 @@ STEP 4 : now open the .xcworkspace from finder
 
 Prerequisite : Need to have cocoapods installed on your macbook.
 
+I have also included a unit test case to validate username and password in DemoProjectTests.swift file.
+
+
