@@ -28,7 +28,8 @@ public enum LoginFields {
 	case password
 }
 
-public enum APIError  {
+public enum APIState  {
 	case network
 	case server
+	case loading
 }

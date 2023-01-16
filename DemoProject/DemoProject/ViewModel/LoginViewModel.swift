@@ -11,7 +11,7 @@ class LoginViewModel  {
 	
 	private var databaseProvider : DatabaseProvider!
 	
-	var onValidationOfLoginValues : ((LoginValidationResults)->())?
+	var onValidationOfLoginValues : ((LoginValidationResults)->(Bool))?
 
 	
 	init() {
@@ -20,35 +20,36 @@ class LoginViewModel  {
 	
 	func validateUserNameAndPassword(userName : String? , password : String?) {
 		if (((userName ?? "").count == 0) && ((password ?? "").count == 0)){
-			self.onValidationOfLoginValues?(.emptyUserNameAndPassword)
+			let _ = self.onValidationOfLoginValues?(.emptyUserNameAndPassword)
 		}
 		else if (userName ?? "").count == 0 {
-			self.onValidationOfLoginValues?(.emptyUserName)
+			_ =  self.onValidationOfLoginValues?(.emptyUserName)
 		}
 		else if (password ?? "").count == 0 {
-			self.onValidationOfLoginValues?(.emptyPassword)
+			 _  = self.onValidationOfLoginValues?(.emptyPassword)
 		}
 		else {
 			if databaseProvider.database == nil {
-				self.onValidationOfLoginValues?(.databaseError)
+				_  = self.onValidationOfLoginValues?(.databaseError)
 			}
 			else {
 				let databaseResults =  databaseProvider.checkIfUserExists(userName: userName ?? "")
 				switch databaseResults.1 {
 					case .error :
-						self.onValidationOfLoginValues?(.databaseError)
+						_ = self.onValidationOfLoginValues?(.databaseError)
 						break
 					case .success :
 						let loginUser = databaseResults.0
 						if ((loginUser?.password ?? "") == (password ?? "")) {
-							self.onValidationOfLoginValues?(.validationSuccess)
+							let val = self.onValidationOfLoginValues?(.validationSuccess)
+							UserDefaultsHelper.setObject(value: val, key: .isUserLoggedIn)
 						}
 						else {
-							self.onValidationOfLoginValues?(.invalidPassword)
+							_  = self.onValidationOfLoginValues?(.invalidPassword)
 						}
 						break
 					case .noResults :
-						self.onValidationOfLoginValues?(.invalidUsername)
+						_ = self.onValidationOfLoginValues?(.invalidUsername)
 						break
 				}
 			}

@@ -246,7 +246,17 @@ final class LoginViewController : BaseViewController {
 		self.loginViewModel.onValidationOfLoginValues  = {
 			[weak self] result in
 			if result == .validationSuccess {
-				print("Success")
+				DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+					if #available(iOS 13.0, *) {
+						HelperFunctions.getFirstSceneDelegate()?.takeUserToHome()
+					} else {
+						HelperFunctions.getAppDelegate()?.takeUserToHome()
+					}
+				})
+				return true
+			}
+			else if result == .databaseError {
+				self?.loaderView.showErrorLabel(errorType: .server, uiView: self?.view ?? UIView())
 			}
 			else {
 				let userNameErrorText = self?.loginViewModel.getTextBasedOnValidationResult(loginValidationResult: result, field: .username)
@@ -262,6 +272,7 @@ final class LoginViewController : BaseViewController {
 				
 				
 			}
+			return false
 		}
 		
 		self.countryViewModel = CountryViewModel()
@@ -270,6 +281,11 @@ final class LoginViewController : BaseViewController {
 			self?.countryflagLabel.text = flagName
 		}
 		self.countryViewModel.selectDefaultCountry()
+		
+		self.loaderView.onActionButton = {
+			[weak self] in
+			self?.loaderView.hideErrorView(uiView: self?.view ?? UIView())
+		}
 		
 	}
 	

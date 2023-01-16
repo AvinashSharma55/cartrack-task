@@ -7,6 +7,7 @@
 
 import Foundation
 import  UIKit
+import MapKit
 
 protocol ReuseIdentifying {
 	static var reuseIdentifier: String { get }
@@ -19,4 +20,4 @@ extension ReuseIdentifying {
 }
 
 extension UITableViewCell : ReuseIdentifying {}
-extension UserMarkerAnnotationView : ReuseIdentifying {}
+extension MKMarkerAnnotationView : ReuseIdentifying {}

@@ -58,7 +58,7 @@ class LoaderView {
 		container.removeFromSuperview()
 	}
 	
-	func showErrorLabel(errorType : APIError , uiView : UIView , errorMessage : String? = nil) {
+	func showErrorLabel(errorType : APIState , uiView : UIView , errorMessage : String? = nil) {
 		
 		container.translatesAutoresizingMaskIntoConstraints = false
 		container.backgroundColor = HelperFunctions.getBlackColor()

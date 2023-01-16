@@ -13,7 +13,7 @@ final class PickerViewController: UIViewController {
 	private var pickerTableView : UITableView!
 	private var searchController : UISearchController!
 	private var topView : UIView!
-	private var onSelectingCountry : ((CountryModel?)->())?
+	var onSelectingCountry : ((CountryModel?)->())?
 
 	private var pickerViewModel : PickerViewModel!
 	
@@ -51,7 +51,7 @@ final class PickerViewController: UIViewController {
 		containerView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 0.0).isActive = true
 		containerView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 0.0).isActive = true
 		containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0.0).isActive = true
-		containerView.heightAnchor.constraint(equalToConstant: (view.frame.height * 0.6)).isActive = true
+		containerView.heightAnchor.constraint(equalToConstant: (view.frame.height * 0.75)).isActive = true
 		
 		
 		topView = UIView()
@@ -75,6 +75,7 @@ final class PickerViewController: UIViewController {
 		pickerTableView.translatesAutoresizingMaskIntoConstraints = false
 		pickerTableView.backgroundColor = .clear
 		pickerTableView.tableHeaderView = searchController.searchBar
+		pickerTableView.tableHeaderView?.backgroundColor = .clear
 		pickerTableView.tableFooterView = UIView.init(frame: .zero)
 		pickerTableView.showsVerticalScrollIndicator = false
 		pickerTableView.delegate = self

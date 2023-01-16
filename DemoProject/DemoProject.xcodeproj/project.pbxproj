@@ -12,7 +12,7 @@
 		E13483D129734F95005D0019 /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483D029734F95005D0019 /* PickerViewController.swift */; };
 		E13483D329735754005D0019 /* CountryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483D229735754005D0019 /* CountryTableViewCell.swift */; };
 		E13483D529735827005D0019 /* CountryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483D429735827005D0019 /* CountryModel.swift */; };
-		E13483D72973587D005D0019 /* UITableViewCell+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483D62973587D005D0019 /* UITableViewCell+Ext.swift */; };
+		E13483D72973587D005D0019 /* ResuseIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483D62973587D005D0019 /* ResuseIdentifiers.swift */; };
 		E13483D929735AB6005D0019 /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483D829735AB6005D0019 /* CountryViewModel.swift */; };
 		E13483DB29735C4F005D0019 /* CountryProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483DA29735C4F005D0019 /* CountryProvider.swift */; };
 		E13483DD29735D2E005D0019 /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483DC29735D2E005D0019 /* String+Ext.swift */; };
@@ -25,6 +25,9 @@
 		E13483EB297489CD005D0019 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483EA297489CD005D0019 /* BaseViewController.swift */; };
 		E13483ED29751D8A005D0019 /* SplashViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483EC29751D8A005D0019 /* SplashViewModel.swift */; };
 		E13483EF29751DD4005D0019 /* UserDefaultsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483EE29751DD4005D0019 /* UserDefaultsHelper.swift */; };
+		E13483F1297530DC005D0019 /* MKMapView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483F0297530DC005D0019 /* MKMapView+Ext.swift */; };
+		E13483F32975349B005D0019 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483F22975349B005D0019 /* UserAnnotation.swift */; };
+		E13483F529755489005D0019 /* UserMarkerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E13483F429755489005D0019 /* UserMarkerAnnotationView.swift */; };
 		E1CFCE1E2971B9C5003A9095 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CFCE1D2971B9C5003A9095 /* AppDelegate.swift */; };
 		E1CFCE202971B9C5003A9095 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CFCE1F2971B9C5003A9095 /* SceneDelegate.swift */; };
 		E1CFCE222971B9C5003A9095 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1CFCE212971B9C5003A9095 /* LoginViewController.swift */; };
@@ -77,7 +80,7 @@
 		E13483D029734F95005D0019 /* PickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewController.swift; sourceTree = "<group>"; };
 		E13483D229735754005D0019 /* CountryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryTableViewCell.swift; sourceTree = "<group>"; };
 		E13483D429735827005D0019 /* CountryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryModel.swift; sourceTree = "<group>"; };
-		E13483D62973587D005D0019 /* UITableViewCell+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Ext.swift"; sourceTree = "<group>"; };
+		E13483D62973587D005D0019 /* ResuseIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResuseIdentifiers.swift; sourceTree = "<group>"; };
 		E13483D829735AB6005D0019 /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
 		E13483DA29735C4F005D0019 /* CountryProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryProvider.swift; sourceTree = "<group>"; };
 		E13483DC29735D2E005D0019 /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
@@ -90,6 +93,9 @@
 		E13483EA297489CD005D0019 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		E13483EC29751D8A005D0019 /* SplashViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewModel.swift; sourceTree = "<group>"; };
 		E13483EE29751DD4005D0019 /* UserDefaultsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsHelper.swift; sourceTree = "<group>"; };
+		E13483F0297530DC005D0019 /* MKMapView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKMapView+Ext.swift"; sourceTree = "<group>"; };
+		E13483F22975349B005D0019 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
+		E13483F429755489005D0019 /* UserMarkerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMarkerAnnotationView.swift; sourceTree = "<group>"; };
 		E1CFCE1A2971B9C5003A9095 /* DemoProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1CFCE1D2971B9C5003A9095 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1CFCE1F2971B9C5003A9095 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -230,6 +236,7 @@
 				E1CFCE762972E5AB003A9095 /* UserGeoLocation.swift */,
 				E1CFCE782972E5D1003A9095 /* UserCompany.swift */,
 				E1CFCE822972FCF0003A9095 /* LoginUser.swift */,
+				E13483F22975349B005D0019 /* UserAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -263,6 +270,8 @@
 			children = (
 				E13483D229735754005D0019 /* CountryTableViewCell.swift */,
 				E13483E8297486F9005D0019 /* LoaderView.swift */,
+				E13483F0297530DC005D0019 /* MKMapView+Ext.swift */,
+				E13483F429755489005D0019 /* UserMarkerAnnotationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -272,7 +281,7 @@
 			children = (
 				E1CFCE552971C09A003A9095 /* StringConstants.swift */,
 				E1CFCE572971C611003A9095 /* HelperFunctions.swift */,
-				E13483D62973587D005D0019 /* UITableViewCell+Ext.swift */,
+				E13483D62973587D005D0019 /* ResuseIdentifiers.swift */,
 				E13483DC29735D2E005D0019 /* String+Ext.swift */,
 				E13483E229747EEE005D0019 /* NetworkState.swift */,
 				E13483E429747F0F005D0019 /* Enums.swift */,
@@ -527,9 +536,11 @@
 				E1CFCE832972FCF0003A9095 /* LoginUser.swift in Sources */,
 				E1CFCE562971C09A003A9095 /* StringConstants.swift in Sources */,
 				E13483D529735827005D0019 /* CountryModel.swift in Sources */,
-				E13483D72973587D005D0019 /* UITableViewCell+Ext.swift in Sources */,
+				E13483D72973587D005D0019 /* ResuseIdentifiers.swift in Sources */,
 				E13483E329747EEE005D0019 /* NetworkState.swift in Sources */,
 				E13483D129734F95005D0019 /* PickerViewController.swift in Sources */,
+				E13483F529755489005D0019 /* UserMarkerAnnotationView.swift in Sources */,
+				E13483F32975349B005D0019 /* UserAnnotation.swift in Sources */,
 				E1CFCE7E2972F93A003A9095 /* DatabaseProvider.swift in Sources */,
 				E13483DB29735C4F005D0019 /* CountryProvider.swift in Sources */,
 				E1CFCE222971B9C5003A9095 /* LoginViewController.swift in Sources */,
@@ -551,6 +562,7 @@
 				E13483EF29751DD4005D0019 /* UserDefaultsHelper.swift in Sources */,
 				E1CFCE772972E5AB003A9095 /* UserGeoLocation.swift in Sources */,
 				E13483E729747F3A005D0019 /* APIConstants.swift in Sources */,
+				E13483F1297530DC005D0019 /* MKMapView+Ext.swift in Sources */,
 				E1CFCE732972E381003A9095 /* UserModel.swift in Sources */,
 				E1CFCE582971C611003A9095 /* HelperFunctions.swift in Sources */,
 				E1CFCE752972E56F003A9095 /* UserAddress.swift in Sources */,

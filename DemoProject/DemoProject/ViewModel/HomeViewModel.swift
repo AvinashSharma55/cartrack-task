@@ -7,29 +7,29 @@
 
 import Foundation
 import Moya
-import UIKit
+import CoreLocation
 
-class HomeViewModel {
+class HomeViewModel : NSObject {
 	
 	private let homeProvider = MoyaProvider<HomeProvider>()
 	private (set) var users : [UserModel]! {
 		didSet {
-			onSuccessfullyFetchingData?(users)
+			convertUsersToAnnotation()
 		}
 	}
-	var onSuccessfullyFetchingData : (([UserModel]?)->())?
-	private var onErroFetchingData : ((APIError)->())?
-	private var showLoaderToStartFetching : (()->())?
+	var onSuccessfullyFetchingData : (([UserAnnotation]?)->())?
+	private var loaderShowingBlock : ((APIState)->())?
 	
-	init(loadingBlock : (()->())? , errorLoadingBlock : ((APIError?)->())?) {
-		showLoaderToStartFetching = loadingBlock
-		onErroFetchingData = errorLoadingBlock
+	
+	init(loading : ((APIState)->())?) {
+		super.init()
+		loaderShowingBlock = loading
 		fetchUserData()
 	}
 	
 	private func fetchUserData() {
 		if NetworkState.isConnected() {
-			self.showLoaderToStartFetching?()
+			self.loaderShowingBlock?(.loading)
 			homeProvider.request(.fetchHomeData) { [weak self] result in
 				guard let _ = self else { return }
 					switch result {
@@ -39,19 +39,28 @@ class HomeViewModel {
 							self?.users = users
 						}
 						catch {
-							self?.onErroFetchingData?(.server)
+							self?.loaderShowingBlock?(.server)
 						}
 					case .failure( _ ):
-							self?.onErroFetchingData?(.server)
+							self?.loaderShowingBlock?(.server)
 					}
 			}
 		}
 		else {
-			onErroFetchingData?(.network)
+			loaderShowingBlock?(.network)
 		}
 	}
 	
 	func retryFetchingUsers() {
 		fetchUserData()
+	}
+	
+	func convertUsersToAnnotation() {
+		var annotations = [UserAnnotation]()
+		for user in users ?? [] {
+			let annotation  = UserAnnotation(name: user.name, coordinate: CLLocationCoordinate2D(latitude: (Double(user.address?.geoLocation?.latitude ?? "") ?? 0.0), longitude: (Double(user.address?.geoLocation?.longitude ?? "") ?? 0.0)) , userName:  user.username , companyName: user.company?.name , address: user.address)
+			annotations.append(annotation)
+		}
+		onSuccessfullyFetchingData?(annotations)
 	}
 }
